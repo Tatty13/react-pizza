@@ -1,4 +1,20 @@
+import { useState } from 'react';
+
 function Sort() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const options = ['популярности', 'цене', 'алфавиту'];
+  const [activeOption, setActiveOption] = useState(options[0]);
+
+  function checkOption(option) {
+    setActiveOption(option);
+    setIsPopupOpen(false);
+  }
+
+  const optionElems = options.map((option, i) => (
+    <li key={i} onClick={() => checkOption(option)} className={activeOption === option ? 'active' : ''}>{option}</li>
+  ));
+
   return (
     <div className='sort'>
       <div className='sort__label'>
@@ -14,15 +30,13 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={() => setIsPopupOpen(!isPopupOpen)}>{activeOption}</span>
       </div>
-      <div className='sort__popup'>
-        <ul>
-          <li className='active'>популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {isPopupOpen && (
+        <div className='sort__popup'>
+          <ul>{optionElems}</ul>
+        </div>
+      )}
     </div>
   );
 }
