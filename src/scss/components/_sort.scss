@@ -50,4 +50,10 @@
       }
     }
   }
+
+  @media (max-width: 1280px) {
+    b {
+      display: none;
+    }
+  }
 }
