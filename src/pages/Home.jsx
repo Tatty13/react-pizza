@@ -23,7 +23,10 @@ function Home() {
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
+
+    window.scrollTo(0, 0);
   }, []);
+
   const pizzasBlocksElems = items.map((pizza) => (
     <PizzaBlock
       key={pizza.id}
@@ -34,7 +37,7 @@ function Home() {
   const skeletonElems = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
   return (
-    <>
+    <div className='container'>
       <div className='content__top'>
         <Categories />
         <Sort />
@@ -43,7 +46,7 @@ function Home() {
       <div className='content__items'>
         {isLoading ? skeletonElems : pizzasBlocksElems}
       </div>
-    </>
+    </div>
   );
 }
 
