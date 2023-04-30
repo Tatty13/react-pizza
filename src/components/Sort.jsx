@@ -1,10 +1,16 @@
 import { useState } from 'react';
 
-function Sort() {
+function Sort({ activeOption, setActiveOption }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const options = ['популярности', 'цене', 'алфавиту'];
-  const [activeOption, setActiveOption] = useState(options[0]);
+  const options = [
+    { name: 'популярности ↓', sortValue: 'rating', order: 'desc' },
+    { name: 'популярности ↑', sortValue: 'rating', order: 'ask' },
+    { name: 'цене ↓', sortValue: 'price', order: 'desc' },
+    { name: 'цене ↑', sortValue: 'price', order: 'ask' },
+    { name: 'алфавиту ↓', sortValue: 'title', order: 'desc' },
+    { name: 'алфавиту ↑', sortValue: 'title', order: 'ask' },
+  ];
 
   function checkOption(option) {
     setActiveOption(option);
@@ -12,7 +18,12 @@ function Sort() {
   }
 
   const optionElems = options.map((option, i) => (
-    <li key={i} onClick={() => checkOption(option)} className={activeOption === option ? 'active' : ''}>{option}</li>
+    <li
+      key={i}
+      onClick={() => checkOption(option)}
+      className={activeOption.name === option.name ? 'active' : ''}>
+      {option.name}
+    </li>
   ));
 
   return (
@@ -30,7 +41,9 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setIsPopupOpen(!isPopupOpen)}>{activeOption}</span>
+        <span onClick={() => setIsPopupOpen(!isPopupOpen)}>
+          {activeOption.name}
+        </span>
       </div>
       {isPopupOpen && (
         <div className='sort__popup'>

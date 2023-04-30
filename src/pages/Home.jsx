@@ -8,9 +8,25 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeSortOption, setActiveSortOption] = useState({
+    name: 'популярности ↓',
+    sortValue: 'rating',
+    order: 'desc',
+  });
+  const [activeCategoryId, setActiveCategoryId] = useState(0);
 
   useEffect(() => {
-    fetch('https://64428d4c76540ce2258f62b6.mockapi.io/items')
+    setIsLoading(true);
+    console.log(
+      `https://64428d4c76540ce2258f62b6.mockapi.io/items?${
+        activeCategoryId ? `category=${activeCategoryId}` : ''
+      }&sortBy=${activeSortOption.sortValue}&order=${activeSortOption.order}`
+    );
+    fetch(
+      `https://64428d4c76540ce2258f62b6.mockapi.io/items?${
+        activeCategoryId ? '&category=' + activeCategoryId : ''
+      }&sortBy=${activeSortOption.sortValue}&order=${activeSortOption.order}`
+    )
       .then((res) =>
         res.ok
           ? res.json()
@@ -25,7 +41,7 @@ function Home() {
       .catch((err) => console.log(err));
 
     window.scrollTo(0, 0);
-  }, []);
+  }, [activeCategoryId, activeSortOption]);
 
   const pizzasBlocksElems = items.map((pizza) => (
     <PizzaBlock
@@ -39,8 +55,14 @@ function Home() {
   return (
     <div className='container'>
       <div className='content__top'>
-        <Categories />
-        <Sort />
+        <Categories
+          activeIdx={activeCategoryId}
+          setActiveIdx={setActiveCategoryId}
+        />
+        <Sort
+          activeOption={activeSortOption}
+          setActiveOption={setActiveSortOption}
+        />
       </div>
       <h2 className='content__title'>Все пиццы</h2>
       <div className='content__items'>

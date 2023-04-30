@@ -1,8 +1,4 @@
-import { useState } from 'react';
-
-function Categories() {
-  const [activeIdx, setActiveIdx] = useState(3);
-
+function Categories({ activeIdx, setActiveIdx }) {
   const categoryTypes = [
     'Все',
     'Мясные',
