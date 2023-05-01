@@ -1,0 +1,56 @@
+$orange: #fe5f1e;
+
+.paginate {
+  margin: 0 auto;
+  padding: 25px 0;
+  width: fit-content;
+  display: flex;
+  gap: 25px;
+
+  li {
+    border: 1px solid rgba($color: $orange, $alpha: 0.7);
+    border-radius: 50%;
+  }
+
+  a {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $orange;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      background: $orange;
+      color: #fff;
+      opacity: 1;
+    }
+
+    &:active {
+      // opacity: .6;
+
+      background-color: rgba($color: $orange, $alpha: 0.8);
+    }
+  }
+}
+
+:global {
+  .disabled {
+    opacity: 0.5;
+
+    a {
+      pointer-events: none;
+    }
+  }
+
+  .selected {
+    background-color: rgba($color: #fe5f1e, $alpha: 1);
+
+    a {
+      color: #fff;
+    }
+  }
+}
