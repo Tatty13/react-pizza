@@ -1,6 +1,11 @@
-import styles from './Search.module.scss';
+import { useContext } from 'react';
 
-function Search({ searchValue, setSearchValue }) {
+import styles from './Search.module.scss';
+import SearchContext from '../../contexts/SearchContext';
+
+function Search() {
+  const { searchValue, setSearchValue } = useContext(SearchContext);
+
   function handleChange(e) {
     setSearchValue(e.target.value);
   }
