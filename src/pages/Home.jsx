@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import SearchContext from '../contexts/SearchContext';
 
@@ -8,17 +9,22 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 
+import { setActiveCategoryId } from '../redux/slices/filterSlice';
+
 function Home() {
+  const dispatch = useDispatch();
+  const { activeCategoryId, activeSortOption } = useSelector(
+    (state) => state.filter
+  );
+
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSortOption, setActiveSortOption] = useState({
-    name: 'популярности ↓',
-    sortValue: 'rating',
-    order: 'desc',
-  });
-  const [activeCategoryId, setActiveCategoryId] = useState(0);
   const [activePage, setActivePage] = useState(1);
+
+  const handleCategoryClick = (id) => {
+    dispatch(setActiveCategoryId(id));
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -72,12 +78,9 @@ function Home() {
       <div className='content__top'>
         <Categories
           activeIdx={activeCategoryId}
-          setActiveIdx={setActiveCategoryId}
+          setActiveIdx={handleCategoryClick}
         />
-        <Sort
-          activeOption={activeSortOption}
-          setActiveOption={setActiveSortOption}
-        />
+        <Sort />
       </div>
       <h2 className='content__title'>Все пиццы</h2>
       <div className='content__items'>
