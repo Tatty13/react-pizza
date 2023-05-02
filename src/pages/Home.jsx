@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import SearchContext from '../contexts/SearchContext';
 
@@ -33,17 +34,12 @@ function Home() {
     const order = `order=${activeSortOption.order}`;
     const search = searchValue ? `&search=${searchValue}` : '';
     const page = `page=${activePage}`;
-    fetch(
-      `https://64428d4c76540ce2258f62b6.mockapi.io/items?${page}&limit=4&${category}&${sortBy}&${order}${search}`
-    )
-      .then((res) =>
-        res.ok
-          ? res.json()
-          : Promise.reject(
-              `Упс! Кажется, что-то пошло не так. Ошибка ${res.status}: данные не получены.`
-            )
+
+    axios
+      .get(
+        `https://64428d4c76540ce2258f62b6.mockapi.io/items?${page}&limit=4&${category}&${sortBy}&${order}${search}`
       )
-      .then((data) => {
+      .then(({ data }) => {
         setItems(data);
         setIsLoading(false);
       })
