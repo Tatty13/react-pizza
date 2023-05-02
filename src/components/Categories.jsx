@@ -1,13 +1,6 @@
-function Categories({ activeIdx, setActiveIdx }) {
-  const categoryTypes = [
-    'Все',
-    'Мясные',
-    'Вегетарианские',
-    'Гриль',
-    'Острые',
-    'Закрытые',
-  ];
+import categoryTypes from '../utils/categoryTypes';
 
+function Categories({ activeIdx, setActiveIdx }) {
   const categoryElems = categoryTypes.map((category, i) => (
     <li
       key={i}
