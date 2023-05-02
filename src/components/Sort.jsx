@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setActiveSortOption } from '../redux/slices/filterSlice';
+import options from '../utils/sortOptions';
 
 function Sort() {
   const dispatch = useDispatch();
@@ -9,15 +10,6 @@ function Sort() {
   console.log('activeOption', activeOption);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const options = [
-    { name: 'популярности ↓', sortValue: 'rating', order: 'desc' },
-    { name: 'популярности ↑', sortValue: 'rating', order: 'ask' },
-    { name: 'цене ↓', sortValue: 'price', order: 'desc' },
-    { name: 'цене ↑', sortValue: 'price', order: 'ask' },
-    { name: 'алфавиту ↓', sortValue: 'title', order: 'desc' },
-    { name: 'алфавиту ↑', sortValue: 'title', order: 'ask' },
-  ];
 
   function checkOption(option) {
     dispatch(setActiveSortOption(option));
