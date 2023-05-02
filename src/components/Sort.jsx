@@ -7,7 +7,6 @@ import options from '../utils/sortOptions';
 function Sort() {
   const dispatch = useDispatch();
   const activeOption = useSelector((state) => state.filter.activeSortOption);
-  console.log('activeOption', activeOption);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
