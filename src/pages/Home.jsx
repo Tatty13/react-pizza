@@ -1,6 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import qs from 'qs';
 
 import SearchContext from '../contexts/SearchContext';
 
@@ -13,10 +15,18 @@ import Pagination from '../components/Pagination';
 import {
   setActiveCategoryId,
   setActivePage,
+  setFilters,
 } from '../redux/slices/filterSlice';
+
+import sortOptions from '../utils/sortOptions';
 
 function Home() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isSearch = useRef(false);
+  const isMounted = useRef(false);
+
   const { activeCategoryId, activeSortOption, activePage } = useSelector(
     (state) => state.filter
   );
@@ -33,8 +43,9 @@ function Home() {
     dispatch(setActivePage(id));
   };
 
-  useEffect(() => {
+  const fetchPizzas = useCallback(() => {
     setIsLoading(true);
+
     const category = activeCategoryId ? `&category=${activeCategoryId}` : '';
     const sortBy = `sortBy=${activeSortOption.sortValue}`;
     const order = `order=${activeSortOption.order}`;
@@ -50,9 +61,50 @@ function Home() {
         setIsLoading(false);
       })
       .catch((err) => console.log(err));
+  }, [activeCategoryId, activeSortOption, activePage, searchValue]);
 
-    window.scrollTo(0, 0);
-  }, [activeCategoryId, activeSortOption, searchValue, activePage]);
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      const sortOption = sortOptions.find(
+        (opt) =>
+          opt.sortValue === params.sortValue && opt.order === params.sortOrder
+      );
+
+      dispatch(setFilters({ ...params, sortOption }));
+      isSearch.current = true;
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
+
+    isSearch.current = false;
+    // window.scrollTo(0, 0);
+  }, [
+    activeCategoryId,
+    activeSortOption,
+    searchValue,
+    activePage,
+    fetchPizzas,
+  ]);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortOrder: activeSortOption.order,
+        sortValue: activeSortOption.sortValue,
+        activeCategoryId,
+        activePage,
+      });
+
+      navigate(`?${queryString}`);
+    }
+    isMounted.current = true;
+  }, [activeCategoryId, activeSortOption, activePage, navigate]);
 
   const pizzasBlocksElems = items.map((pizza) => (
     <PizzaBlock
@@ -88,7 +140,10 @@ function Home() {
       <div className='content__items'>
         {isLoading ? skeletonElems : pizzasBlocksElems}
       </div>
-      <Pagination setActivePage={handlePageChange} />
+      <Pagination
+        currentPage={activePage}
+        setActivePage={handlePageChange}
+      />
     </div>
   );
 }
