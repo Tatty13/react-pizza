@@ -10,21 +10,27 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 
-import { setActiveCategoryId } from '../redux/slices/filterSlice';
+import {
+  setActiveCategoryId,
+  setActivePage,
+} from '../redux/slices/filterSlice';
 
 function Home() {
   const dispatch = useDispatch();
-  const { activeCategoryId, activeSortOption } = useSelector(
+  const { activeCategoryId, activeSortOption, activePage } = useSelector(
     (state) => state.filter
   );
 
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activePage, setActivePage] = useState(1);
 
   const handleCategoryClick = (id) => {
     dispatch(setActiveCategoryId(id));
+  };
+
+  const handlePageChange = (id) => {
+    dispatch(setActivePage(id));
   };
 
   useEffect(() => {
@@ -82,7 +88,7 @@ function Home() {
       <div className='content__items'>
         {isLoading ? skeletonElems : pizzasBlocksElems}
       </div>
-      <Pagination setActivePage={setActivePage} />
+      <Pagination setActivePage={handlePageChange} />
     </div>
   );
 }
