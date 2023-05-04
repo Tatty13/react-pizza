@@ -113,18 +113,6 @@ function Home() {
     />
   ));
 
-  //static search
-  // const pizzasBlocksElems = items
-  //   .filter((pizza) =>
-  //     pizza.title.toLowerCase().includes(searchValue.toLowerCase())
-  //   )
-  //   .map((pizza) => (
-  //     <PizzaBlock
-  //       key={pizza.id}
-  //       {...pizza}
-  //     />
-  //   ));
-
   const skeletonElems = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
   return (
