@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setActiveSortOption } from '../redux/slices/filterSlice';
@@ -14,6 +14,22 @@ function Sort() {
     dispatch(setActiveSortOption(option));
     setIsPopupOpen(false);
   }
+
+  useEffect(() => {
+    const closeByOutsideCLick = (e) => {
+      if (!e.target.closest('.sort')) {
+        setIsPopupOpen(false);
+      }
+    };
+
+    if (isPopupOpen) {
+      document.body.addEventListener('click', closeByOutsideCLick);
+    }
+
+    return () => {
+      document.body.removeEventListener('click', closeByOutsideCLick);
+    };
+  }, [isPopupOpen]);
 
   const optionElems = options.map((option, i) => (
     <li
