@@ -25,12 +25,53 @@ const cartSlice = createSlice({
       state.totalCount++;
     },
 
+    removeItem(state, action) {
+      const { id, price, type, size } = action.payload;
+      const findedItems = state.items.find(
+        (item) =>
+          item.id === id &&
+          item.price === price &&
+          item.type === type &&
+          item.size === size
+      );
+
+      if (findedItems.count > 1) {
+        findedItems.count--;
+      } else {
+        const idx = state.items.indexOf(findedItems);
+        state.items.splice(idx, 1);
+      }
+
+      state.totalPrice -= action.payload.price;
+      state.totalCount--;
+    },
+
+    removeItemType(state, action) {
+      const { id, price, type, size } = action.payload;
+      const findedItem = state.items.find(
+        (item) =>
+          item.id === id &&
+          item.price === price &&
+          item.type === type &&
+          item.size === size
+      );
+
+      const idx = state.items.indexOf(findedItem);
+      state.items.splice(idx, 1);
+
+      state.totalCount -= findedItem.count;
+      state.totalPrice -= findedItem.count * findedItem.price;
+    },
+
     removeAllItems(state) {
       state.items = [];
+      state.totalCount = 0;
+      state.totalPrice = 0;
     },
   },
 });
 
-export const { addItem, removeItem, removeAllItems } = cartSlice.actions;
+export const { addItem, removeItem, removeAllItems, removeItemType } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
