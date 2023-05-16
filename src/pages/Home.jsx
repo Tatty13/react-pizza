@@ -13,11 +13,12 @@ import Pagination from '../components/Pagination';
 import ErrorInfo from '../components/ErrorInfo';
 
 import {
+  selectFilter,
   setActiveCategoryId,
   setActivePage,
   setFilters,
 } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
+import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 
 import sortOptions from '../utils/sortOptions';
 
@@ -28,10 +29,9 @@ function Home() {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { activeCategoryId, activeSortOption, activePage } = useSelector(
-    (state) => state.filter
-  );
-  const { items, fetchStatus } = useSelector((state) => state.pizzas);
+  const { activeCategoryId, activeSortOption, activePage } =
+    useSelector(selectFilter);
+  const { items, fetchStatus } = useSelector(selectPizzas);
 
   const { searchValue } = useContext(SearchContext);
 

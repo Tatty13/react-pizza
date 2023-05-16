@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setActiveSortOption } from '../redux/slices/filterSlice';
+import {
+  selectActiveOption,
+  setActiveSortOption,
+} from '../redux/slices/filterSlice';
 import options from '../utils/sortOptions';
 
 function Sort() {
   const dispatch = useDispatch();
-  const activeOption = useSelector((state) => state.filter.activeSortOption);
+  const activeOption = useSelector(selectActiveOption);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 

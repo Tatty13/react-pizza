@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 import CartEmpty from '../components/CartEmpty';
 
-import { removeAllItems } from '../redux/slices/cartSlice';
+import { removeAllItems, selectCart } from '../redux/slices/cartSlice';
 
 function Cart() {
   const dispatch = useDispatch();
-  const { items, totalPrice, totalCount } = useSelector((state) => state.cart);
+  const { items, totalPrice, totalCount } = useSelector(selectCart);
 
   const onClearCartClick = () => {
     dispatch(removeAllItems());
