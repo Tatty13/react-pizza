@@ -1,9 +1,7 @@
-import { useCallback, useContext, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
-
-import SearchContext from '../contexts/SearchContext';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -29,11 +27,9 @@ function Home() {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { activeCategoryId, activeSortOption, activePage } =
+  const { activeCategoryId, activeSortOption, activePage, searchValue } =
     useSelector(selectFilter);
   const { items, fetchStatus } = useSelector(selectPizzas);
-
-  const { searchValue } = useContext(SearchContext);
 
   const handleCategoryClick = (id) => {
     dispatch(setActiveCategoryId(id));

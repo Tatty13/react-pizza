@@ -8,6 +8,7 @@ const initialState = {
     order: 'desc',
   },
   activePage: 1,
+  searchValue: '',
 };
 
 const filterSlice = createSlice({
@@ -29,10 +30,13 @@ const filterSlice = createSlice({
       state.activeCategoryId = +activeCategoryId;
       state.activeSortOption = sortOption;
     },
+    setSearchValue(state, action) {
+      state.searchValue = action.payload;
+    },
   },
 });
 
-export const selectFilter = state => state.filter;
+export const selectFilter = (state) => state.filter;
 export const selectActiveOption = (state) => state.filter.activeSortOption;
 
 export const {
@@ -40,6 +44,7 @@ export const {
   setActiveSortOption,
   setActivePage,
   setFilters,
+  setSearchValue,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

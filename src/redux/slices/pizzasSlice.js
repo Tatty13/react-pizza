@@ -7,6 +7,7 @@ export const fetchPizzas = createAsyncThunk(
     const { data } = await axios.get(
       `https://64428d4c76540ce2258f62b6.mockapi.io/items?${page}&limit=4&${category}&${sortBy}&${order}${search}`
     );
+
     return data;
   }
 );
@@ -39,7 +40,7 @@ const pizzasSlice = createSlice({
       state.isLoading = false;
       state.fetchStatus = 'success';
     });
-    builder.addCase(fetchPizzas.rejected, (state, action) => {
+    builder.addCase(fetchPizzas.rejected, (state) => {
       console.log('rejected!!');
       state.items = [];
       state.isLoading = false;
