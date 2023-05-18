@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
 import Categories from '../components/Categories';
@@ -87,10 +87,11 @@ function Home() {
   }, [activeCategoryId, activeSortOption, activePage, navigate]);
 
   const pizzasBlocksElems = items.map((pizza) => (
-    <PizzaBlock
-      key={pizza.id}
-      {...pizza}
-    />
+    <Link
+      to={`/pizzas/${pizza.id}`}
+      key={pizza.id}>
+      <PizzaBlock {...pizza} />
+    </Link>
   ));
 
   const skeletonElems = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
