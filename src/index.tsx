@@ -8,7 +8,9 @@ import { store } from './redux/store';
 import './scss/app.scss';
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElem = document.getElementById('root') as HTMLElement;
+const root = ReactDOM.createRoot(rootElem);
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
