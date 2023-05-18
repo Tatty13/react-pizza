@@ -1,21 +1,27 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function FullPizza() {
   const [pizza, setPizza] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getPizza() {
-      const { data } = await axios(
-        `https://64428d4c76540ce2258f62b6.mockapi.io/items/${id}`
-      );
-      setPizza(data);
+      try {
+        const { data } = await axios(
+          `https://64428d4c76540ce2258f62b6.mockapi.io/items/${id}`
+        );
+        setPizza(data);
+      } catch (err) {
+        console.log('err', err);
+        navigate('/', { replace: true });
+      }
     }
 
     getPizza();
-  }, [id]);
+  }, [id, navigate]);
 
   if (!pizza.title) {
     return (
