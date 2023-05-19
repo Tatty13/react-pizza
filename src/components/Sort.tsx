@@ -7,19 +7,21 @@ import {
 } from '../redux/slices/filterSlice';
 import options from '../utils/sortOptions';
 
+import type { SortOption } from '../@types/types';
+
 function Sort() {
   const dispatch = useDispatch();
   const activeOption = useSelector(selectActiveOption);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  function checkOption(option) {
+  function checkOption(option: SortOption) {
     dispatch(setActiveSortOption(option));
     setIsPopupOpen(false);
   }
 
   useEffect(() => {
-    const closeByOutsideCLick = (e) => {
+    const closeByOutsideCLick = (e: any) => {
       if (!e.target.closest('.sort')) {
         setIsPopupOpen(false);
       }
