@@ -1,4 +1,6 @@
-const sortOptions = [
+import type { SortOption } from '../@types/types';
+
+const sortOptions: SortOption[] = [
   { name: 'популярности ↓', sortValue: 'rating', order: 'desc' },
   { name: 'популярности ↑', sortValue: 'rating', order: 'ask' },
   { name: 'цене ↓', sortValue: 'price', order: 'desc' },
