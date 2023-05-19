@@ -1,6 +1,12 @@
 import categoryTypes from '../utils/categoryTypes';
+import React from 'react';
 
-function Categories({ activeIdx, setActiveIdx }) {
+type CategoriesProps = {
+  activeIdx: number;
+  setActiveIdx: any;
+};
+
+const Categories: React.FC<CategoriesProps> = ({ activeIdx, setActiveIdx }) => {
   const categoryElems = categoryTypes.map((category, i) => (
     <li
       key={i}
@@ -15,6 +21,6 @@ function Categories({ activeIdx, setActiveIdx }) {
       <ul>{categoryElems}</ul>
     </div>
   );
-}
+};
 
 export default Categories;
