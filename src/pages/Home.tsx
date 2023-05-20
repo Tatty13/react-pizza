@@ -33,8 +33,8 @@ function Home() {
     useSelector(selectFilter);
   const { items, fetchStatus } = useSelector(selectPizzas);
 
-  const handleCategoryClick = (id: number) => {
-    dispatch(setActiveCategoryId(id));
+  const handleCategoryClick = (idx: number) => {
+    dispatch(setActiveCategoryId(idx));
   };
 
   const handlePageChange = (id: number) => {

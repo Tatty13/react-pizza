@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -21,8 +21,8 @@ function Sort() {
   }
 
   useEffect(() => {
-    const closeByOutsideCLick = (e: any) => {
-      if (!e.target.closest('.sort')) {
+    const closeByOutsideCLick = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('.sort')) {
         setIsPopupOpen(false);
       }
     };

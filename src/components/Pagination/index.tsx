@@ -5,7 +5,7 @@ import React from 'react';
 
 type PaginationProps = {
   currentPage: number;
-  setActivePage: any;
+  setActivePage: (page: number) => void;
 };
 
 const Pagination: React.FC<PaginationProps> = ({

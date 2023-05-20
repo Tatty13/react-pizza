@@ -3,7 +3,7 @@ import React from 'react';
 
 type CategoriesProps = {
   activeIdx: number;
-  setActiveIdx: any;
+  setActiveIdx: (idx: number) => void;
 };
 
 const Categories: React.FC<CategoriesProps> = ({ activeIdx, setActiveIdx }) => {
