@@ -6,6 +6,8 @@ import CartEmpty from '../components/CartEmpty';
 
 import { removeAllItems, selectCart } from '../redux/slices/cartSlice';
 
+import type { CartItemProps } from '../@types/types';
+
 function Cart() {
   const dispatch = useDispatch();
   const { items, totalPrice, totalCount } = useSelector(selectCart);
@@ -14,7 +16,7 @@ function Cart() {
     dispatch(removeAllItems());
   };
 
-  const cartItemsList = items.map((item, i) => (
+  const cartItemsList = items.map((item: CartItemProps, i: number) => (
     <CartItem
       key={i}
       {...item}
