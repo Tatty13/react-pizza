@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { debounce } from 'lodash';
+import debounce from 'lodash.debounce';
 import { useDispatch } from 'react-redux';
 
 import styles from './Search.module.scss';
@@ -10,15 +10,15 @@ function Search() {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState('');
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const updateSearchValue = useRef(
-    debounce((str) => {
+    debounce((str: string) => {
       dispatch(setSearchValue(str));
     }, 1000)
   ).current;
 
-  function handleChange(e) {
+  function handleChange(e: any) {
     setValue(e.target.value);
     updateSearchValue(e.target.value);
   }
@@ -26,7 +26,7 @@ function Search() {
   function handleClearClick() {
     setValue('');
     dispatch(setSearchValue(''));
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }
 
   return (
