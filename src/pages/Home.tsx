@@ -18,6 +18,8 @@ import {
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 
+import type { PizzaBlockProps } from '../@types/types';
+
 import sortOptions from '../utils/sortOptions';
 
 function Home() {
@@ -31,11 +33,11 @@ function Home() {
     useSelector(selectFilter);
   const { items, fetchStatus } = useSelector(selectPizzas);
 
-  const handleCategoryClick = (id) => {
+  const handleCategoryClick = (id: number) => {
     dispatch(setActiveCategoryId(id));
   };
 
-  const handlePageChange = (id) => {
+  const handlePageChange = (id: number) => {
     dispatch(setActivePage(id));
   };
 
@@ -46,6 +48,7 @@ function Home() {
     const order = `order=${activeSortOption.order}`;
     const search = searchValue ? `&search=${searchValue}` : '';
 
+    //@ts-ignore
     dispatch(fetchPizzas({ page, category, sortBy, order, search }));
   }, [activeCategoryId, activeSortOption, activePage, searchValue, dispatch]);
 
@@ -86,7 +89,7 @@ function Home() {
     isMounted.current = true;
   }, [activeCategoryId, activeSortOption, activePage, navigate]);
 
-  const pizzasBlocksElems = items.map((pizza) => (
+  const pizzasBlocksElems = items.map((pizza: PizzaBlockProps) => (
     <PizzaBlock
       key={pizza.id}
       {...pizza}
