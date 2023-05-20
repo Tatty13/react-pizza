@@ -1,4 +1,4 @@
-const categoryTypes = [
+const categoryTypes: string[] = [
   'Все',
   'Мясные',
   'Вегетарианские',
