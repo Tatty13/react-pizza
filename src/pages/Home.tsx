@@ -34,13 +34,19 @@ function Home() {
     useSelector(selectFilter);
   const { items, fetchStatus } = useSelector(selectPizzas);
 
-  const handleCategoryClick = (idx: number) => {
-    dispatch(setActiveCategoryId(idx));
-  };
+  const handleCategoryClick = useCallback(
+    (idx: number) => {
+      dispatch(setActiveCategoryId(idx));
+    },
+    [dispatch]
+  );
 
-  const handlePageChange = (id: number) => {
-    dispatch(setActivePage(id));
-  };
+  const handlePageChange = useCallback(
+    (id: number) => {
+      dispatch(setActivePage(id));
+    },
+    [dispatch]
+  );
 
   const getPizzas = useCallback(async () => {
     const page = `page=${activePage}`;
@@ -55,8 +61,6 @@ function Home() {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-
-      console.log(params);
 
       const activeSortOption = sortOptions.find(
         (opt) =>
