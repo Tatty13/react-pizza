@@ -1,6 +1,6 @@
 export type SortOption = {
   name: string;
-  sortValue: string;
+  sortValue: 'rating' | 'price' | 'title';
   order: 'desc' | 'ask';
 };
 
@@ -17,8 +17,8 @@ export type CartItemProps = {
 export type PizzaBlockProps = {
   id: string;
   title: string;
-  price: number;
   imageUrl: string;
-  sizes: number[];
   types: number[];
+  price: number;
+  sizes: number[];
 };
