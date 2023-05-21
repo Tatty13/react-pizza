@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import type { SortOption } from '../../@types/types';
+import { Orders, SortOption, SortValues } from '../../@types/types';
 import type { RootState } from '../store';
 
 interface IFilterSliceState {
@@ -14,8 +14,8 @@ const initialState: IFilterSliceState = {
   activeCategoryId: 0,
   activeSortOption: {
     name: 'популярности ↓',
-    sortValue: 'rating',
-    order: 'desc',
+    sortValue: SortValues.RATING,
+    order: Orders.DESC,
   },
   activePage: 1,
   searchValue: '',

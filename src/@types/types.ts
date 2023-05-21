@@ -1,7 +1,18 @@
+export enum SortValues {
+  RATING = 'rating',
+  PRICE = 'price',
+  TITLE = 'title',
+}
+
+export enum Orders {
+  DESC = 'desc',
+  ASK = 'ask',
+}
+
 export type SortOption = {
   name: string;
-  sortValue: 'rating' | 'price' | 'title';
-  order: 'desc' | 'ask';
+  sortValue: SortValues;
+  order: Orders;
 };
 
 export type CartItemProps = {

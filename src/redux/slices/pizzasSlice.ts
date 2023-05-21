@@ -28,16 +28,22 @@ export const fetchPizzas = createAsyncThunk<
   }
 );
 
+enum Status {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}
+
 interface IPizzaSliceState {
   items: PizzaBlockProps[];
   isLoading: boolean;
-  fetchStatus: 'loading' | 'success' | 'error';
+  fetchStatus: Status;
 }
 
 const initialState: IPizzaSliceState = {
   items: [],
   isLoading: true,
-  fetchStatus: 'loading',
+  fetchStatus: Status.LOADING,
 };
 
 const pizzasSlice = createSlice({
@@ -54,17 +60,17 @@ const pizzasSlice = createSlice({
     builder.addCase(fetchPizzas.pending, (state) => {
       state.items = [];
       state.isLoading = true;
-      state.fetchStatus = 'loading';
+      state.fetchStatus = Status.LOADING;
     });
     builder.addCase(fetchPizzas.fulfilled, (state, action) => {
       state.items = action.payload;
       state.isLoading = false;
-      state.fetchStatus = 'success';
+      state.fetchStatus = Status.SUCCESS;
     });
     builder.addCase(fetchPizzas.rejected, (state) => {
       state.items = [];
       state.isLoading = false;
-      state.fetchStatus = 'error';
+      state.fetchStatus = Status.ERROR;
     });
   },
 });
