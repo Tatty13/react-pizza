@@ -66,8 +66,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
           src={imageUrl}
           alt='Pizza'
         />
+        <h4 className='pizza-block__title'>{title}</h4>
       </Link>
-      <h4 className='pizza-block__title'>{title}</h4>
       <div className='pizza-block__selector'>
         <ul>{typeElems}</ul>
         <ul>{sizesElems}</ul>
