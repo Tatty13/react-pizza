@@ -46,7 +46,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
   ));
 
   const increasePizzaCount = () => {
-    const item = {
+    const item: CartItemProps = {
       id,
       title,
       price,

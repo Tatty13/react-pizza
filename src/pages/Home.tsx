@@ -56,13 +56,21 @@ function Home() {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
 
-      const sortOption = sortOptions.find(
+      const activeSortOption = sortOptions.find(
         (opt) =>
           opt.sortValue === params.sortValue && opt.order === params.sortOrder
       );
 
-      dispatch(setFilters({ ...params, sortOption }));
-      isSearch.current = true;
+      const activePage = Number(params.activePage) as number;
+      const activeCategoryId = Number(params.activeCategoryId) as number;
+
+      if (activeSortOption) {
+        dispatch(
+          setFilters({ activeSortOption, activePage, activeCategoryId })
+        );
+
+        isSearch.current = true;
+      }
     }
   }, [dispatch]);
 
