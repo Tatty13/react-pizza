@@ -120,7 +120,7 @@ function Home() {
           activeIdx={activeCategoryId}
           setActiveIdx={handleCategoryClick}
         />
-        <Sort />
+        <Sort activeOption={activeSortOption} />
       </div>
       <h2 className='content__title'>Все пиццы</h2>
 

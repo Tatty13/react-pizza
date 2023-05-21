@@ -1,18 +1,17 @@
 import React, { useEffect, useState, memo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import {
-  selectActiveOption,
-  setActiveSortOption,
-} from '../redux/slices/filterSlice';
+import { setActiveSortOption } from '../redux/slices/filterSlice';
 import options from '../utils/sortOptions';
 
 import type { SortOption } from '../@types/types';
 
-const Sort: React.FC = memo(() => {
-  const dispatch = useDispatch();
-  const activeOption = useSelector(selectActiveOption);
+type TSortProps = {
+  activeOption: SortOption;
+};
 
+const Sort: React.FC<TSortProps> = memo(({ activeOption }) => {
+  const dispatch = useDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   function checkOption(option: SortOption) {
