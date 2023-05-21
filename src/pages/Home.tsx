@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
@@ -17,13 +17,14 @@ import {
   setFilters,
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
+import { useAppDispatch } from '../redux/store';
 
 import type { PizzaBlockProps } from '../@types/types';
 
 import sortOptions from '../utils/sortOptions';
 
 function Home() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const isSearch = useRef(false);
@@ -48,7 +49,6 @@ function Home() {
     const order = `order=${activeSortOption.order}`;
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    //@ts-ignore
     dispatch(fetchPizzas({ page, category, sortBy, order, search }));
   }, [activeCategoryId, activeSortOption, activePage, searchValue, dispatch]);
 
@@ -56,17 +56,20 @@ function Home() {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
 
+      console.log(params);
+
       const activeSortOption = sortOptions.find(
         (opt) =>
           opt.sortValue === params.sortValue && opt.order === params.sortOrder
       );
 
-      const activePage = Number(params.activePage) as number;
-      const activeCategoryId = Number(params.activeCategoryId) as number;
-
       if (activeSortOption) {
         dispatch(
-          setFilters({ activeSortOption, activePage, activeCategoryId })
+          setFilters({
+            activeSortOption,
+            activePage: Number(params.activePage),
+            activeCategoryId: Number(params.activeCategoryId),
+          })
         );
 
         isSearch.current = true;
