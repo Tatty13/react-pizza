@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -9,7 +9,7 @@ import options from '../utils/sortOptions';
 
 import type { SortOption } from '../@types/types';
 
-function Sort() {
+const Sort: React.FC = memo(() => {
   const dispatch = useDispatch();
   const activeOption = useSelector(selectActiveOption);
 
@@ -71,6 +71,6 @@ function Sort() {
       )}
     </div>
   );
-}
+});
 
 export default Sort;

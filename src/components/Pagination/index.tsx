@@ -8,21 +8,22 @@ type PaginationProps = {
   setActivePage: (page: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = ({
-  currentPage,
-  setActivePage,
-}) => (
-  <ReactPaginate
-    className={styles.paginate}
-    breakLabel='...'
-    nextLabel='>'
-    onPageChange={({ selected }) => setActivePage(selected + 1)}
-    pageRangeDisplayed={4}
-    pageCount={3}
-    previousLabel='<'
-    renderOnZeroPageCount={null}
-    forcePage={currentPage - 1}
-  />
+const Pagination: React.FC<PaginationProps> = React.memo(
+  ({ currentPage, setActivePage }) => {
+    return (
+      <ReactPaginate
+        className={styles.paginate}
+        breakLabel='...'
+        nextLabel='>'
+        onPageChange={({ selected }) => setActivePage(selected + 1)}
+        pageRangeDisplayed={4}
+        pageCount={3}
+        previousLabel='<'
+        renderOnZeroPageCount={null}
+        forcePage={currentPage - 1}
+      />
+    );
+  }
 );
 
 export default Pagination;
