@@ -100,8 +100,9 @@ function Home() {
       });
 
       navigate(`?${queryString}`);
+    } else {
+      isMounted.current = true;
     }
-    isMounted.current = true;
   }, [activeCategoryId, activeSortOption, activePage, navigate]);
 
   const pizzasBlocksElems = items.map((pizza: PizzaBlockProps) => (

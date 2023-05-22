@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -6,7 +7,22 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import FullPizza from './pages/FullPizza';
 
+import { useAppDispatch } from './redux/store';
+import { setCart } from './redux/slices/cartSlice';
+import getCartFromLS from './utils/getCartFromLS';
+
 function App() {
+  const isMounted = useRef(false);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      dispatch(setCart(getCartFromLS()));
+    } else {
+      isMounted.current = true;
+    }
+  }, [dispatch]);
+
   return (
     <div className='wrapper'>
       <Header />
