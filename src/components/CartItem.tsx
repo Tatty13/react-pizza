@@ -4,7 +4,7 @@ import {
   increaseItemCount,
   removeItem,
   removeItemType,
-} from '../redux/slices/cartSlice';
+} from '../redux/cart/slice';
 import React from 'react';
 
 import type { CartItemProps } from '../@types/types';

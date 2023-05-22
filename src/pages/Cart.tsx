@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 import CartEmpty from '../components/CartEmpty';
 
-import { removeAllItems, selectCart } from '../redux/slices/cartSlice';
+import { removeAllItems } from '../redux/cart/slice';
+import { selectCart } from '../redux/cart/selectors';
 
 import type { CartItemProps } from '../@types/types';
 

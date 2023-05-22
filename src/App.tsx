@@ -8,7 +8,7 @@ import Cart from './pages/Cart';
 import FullPizza from './pages/FullPizza';
 
 import { useAppDispatch } from './redux/store';
-import { setCart } from './redux/slices/cartSlice';
+import { setCart } from './redux/cart/slice';
 import getCartFromLS from './utils/getCartFromLS';
 
 function App() {
