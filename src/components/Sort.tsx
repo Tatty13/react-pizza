@@ -1,7 +1,7 @@
 import React, { useEffect, useState, memo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setActiveSortOption } from '../redux/slices/filterSlice';
+import { setActiveSortOption } from '../redux/filter/slice';
 import options from '../utils/sortOptions';
 
 import type { SortOption } from '../@types/types';

@@ -11,11 +11,13 @@ import Pagination from '../components/Pagination';
 import ErrorInfo from '../components/ErrorInfo';
 
 import {
-  selectFilter,
   setActiveCategoryId,
   setActivePage,
   setFilters,
-} from '../redux/slices/filterSlice';
+} from '../redux/filter/slice';
+
+import { selectFilter } from '../redux/filter/selectors';
+
 import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 import { useAppDispatch } from '../redux/store';
 

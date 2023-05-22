@@ -1,14 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { IFilterSliceState } from './types';
 import { Orders, SortOption, SortValues } from '../../@types/types';
-import type { RootState } from '../store';
-
-interface IFilterSliceState {
-  activeCategoryId: number;
-  activeSortOption: SortOption;
-  activePage: number;
-  searchValue?: string;
-}
 
 const initialState: IFilterSliceState = {
   activeCategoryId: 0,
@@ -45,10 +38,6 @@ const filterSlice = createSlice({
     },
   },
 });
-
-export const selectFilter = (state: RootState) => state.filter;
-export const selectActiveOption = (state: RootState) =>
-  state.filter.activeSortOption;
 
 export const {
   setActiveCategoryId,
