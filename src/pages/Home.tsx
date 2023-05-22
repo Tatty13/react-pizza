@@ -18,8 +18,9 @@ import {
 
 import { selectFilter } from '../redux/filter/selectors';
 
-import { fetchPizzas, selectPizzas } from '../redux/slices/pizzasSlice';
 import { useAppDispatch } from '../redux/store';
+import { selectPizzas } from '../redux/pizzas/selectors';
+import { fetchPizzas } from '../redux/pizzas/asyncActions';
 
 import type { PizzaBlockProps } from '../@types/types';
 
