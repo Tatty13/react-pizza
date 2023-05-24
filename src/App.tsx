@@ -1,15 +1,20 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './pages/Home';
-import NotFound from './pages/NotFound';
-import Cart from './pages/Cart';
-import FullPizza from './pages/FullPizza';
 
 import { useAppDispatch } from './redux/store';
 import { setCart } from './redux/cart/slice';
 import getCartFromLS from './utils/getCartFromLS';
+
+const Cart = lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Cart'));
+const FullPizza = lazy(
+  () => import(/* webpackChunkName: "FullPizza" */ './pages/FullPizza')
+);
+const NotFound = lazy(
+  () => import(/* webpackChunkName: "NotFound" */ './pages/NotFound')
+);
 
 function App() {
   const isMounted = useRef(false);
@@ -27,24 +32,26 @@ function App() {
     <div className='wrapper'>
       <Header />
       <div className='content'>
-        <Routes>
-          <Route
-            path='/'
-            element={<Home />}
-          />
-          <Route
-            path='/cart'
-            element={<Cart />}
-          />
-          <Route
-            path='/pizzas/:id'
-            element={<FullPizza />}
-          />
-          <Route
-            path='*'
-            element={<NotFound />}
-          />
-        </Routes>
+        <Suspense fallback={<div>Загрузка...</div>}>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home />}
+            />
+            <Route
+              path='/cart'
+              element={<Cart />}
+            />
+            <Route
+              path='/pizzas/:id'
+              element={<FullPizza />}
+            />
+            <Route
+              path='*'
+              element={<NotFound />}
+            />
+          </Routes>
+        </Suspense>
       </div>
     </div>
   );
