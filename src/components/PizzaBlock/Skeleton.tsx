@@ -1,7 +1,6 @@
-import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const Skeleton = (props) => (
+export const Skeleton = () => (
   <ContentLoader
     className='pizza-block'
     speed={2}
@@ -9,8 +8,7 @@ const Skeleton = (props) => (
     height={500}
     viewBox='0 0 280 500'
     backgroundColor='#ededed'
-    foregroundColor='#e4e2e2'
-    {...props}>
+    foregroundColor='#e4e2e2'>
     <rect
       x='0'
       y='260'
@@ -50,5 +48,3 @@ const Skeleton = (props) => (
     />
   </ContentLoader>
 );
-
-export default Skeleton;

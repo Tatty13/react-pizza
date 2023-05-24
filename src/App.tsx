@@ -1,7 +1,7 @@
 import { useRef, useEffect, lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import Header from './components/Header';
+import { Header } from './components';
 import Home from './pages/Home';
 
 import { useAppDispatch } from './redux/store';

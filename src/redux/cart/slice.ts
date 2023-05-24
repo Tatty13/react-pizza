@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { CartItemProps } from '../../@types/types';
 import { CartItemDataToChange, ICartSliceState } from './types';
 
-const initialState: ICartSliceState = {
+export const initialState: ICartSliceState = {
   items: [],
   totalPrice: 0,
   totalCount: 0,
@@ -94,6 +94,13 @@ const cartSlice = createSlice({
 
     setCart(state, action: PayloadAction<ICartSliceState>) {
       const { items, totalCount, totalPrice } = action.payload;
+      console.log(
+        ' items, totalCount, totalPrice',
+        items,
+        totalCount,
+        totalPrice
+      );
+
       state.items = items;
       state.totalCount = totalCount;
       state.totalPrice = totalPrice;

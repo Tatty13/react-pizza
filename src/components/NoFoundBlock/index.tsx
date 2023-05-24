@@ -1,6 +1,6 @@
 import styles from './NotFoundBlock.module.scss';
 
-function NotFoundBlock() {
+export function NotFoundBlock() {
   return (
     <div className={styles.root}>
       <p className={styles.smile}>🥺</p>
@@ -11,5 +11,3 @@ function NotFoundBlock() {
     </div>
   );
 }
-
-export default NotFoundBlock;

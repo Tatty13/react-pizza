@@ -1,6 +1,6 @@
 import styles from './ErrorInfo.module.scss';
 
-function ErrorInfo() {
+export function ErrorInfo() {
   return (
     <div className={styles.error}>
       <h2 className={styles.errorTitle}>
@@ -13,5 +13,3 @@ function ErrorInfo() {
     </div>
   );
 }
-
-export default ErrorInfo;

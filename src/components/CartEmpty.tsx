@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import emptyCartSrc from '../assets/img/empty-cart.png';
 
-function CartEmpty() {
+export function CartEmpty() {
   return (
     <div className='cart cart--empty'>
       <h2>
@@ -25,5 +25,3 @@ function CartEmpty() {
     </div>
   );
 }
-
-export default CartEmpty;

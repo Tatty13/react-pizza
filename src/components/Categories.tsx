@@ -6,7 +6,7 @@ type CategoriesProps = {
   setActiveIdx: (idx: number) => void;
 };
 
-const Categories: React.FC<CategoriesProps> = React.memo(
+export const Categories: React.FC<CategoriesProps> = React.memo(
   ({ activeIdx, setActiveIdx }) => {
     const categoryElems = categoryTypes.map((category, i) => (
       <li
@@ -24,5 +24,3 @@ const Categories: React.FC<CategoriesProps> = React.memo(
     );
   }
 );
-
-export default Categories;
