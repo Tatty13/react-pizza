@@ -10,7 +10,7 @@ type TSortProps = {
   activeOption: SortOption;
 };
 
-const Sort: React.FC<TSortProps> = memo(({ activeOption }) => {
+export const Sort: React.FC<TSortProps> = memo(({ activeOption }) => {
   const dispatch = useDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -71,5 +71,3 @@ const Sort: React.FC<TSortProps> = memo(({ activeOption }) => {
     </div>
   );
 });
-
-export default Sort;

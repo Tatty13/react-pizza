@@ -9,7 +9,7 @@ import React from 'react';
 
 import type { CartItemProps } from '../@types/types';
 
-const CartItem: React.FC<CartItemProps> = ({
+export const CartItem: React.FC<CartItemProps> = ({
   id,
   title,
   price,
@@ -113,5 +113,3 @@ const CartItem: React.FC<CartItemProps> = ({
     </div>
   );
 };
-
-export default CartItem;

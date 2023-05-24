@@ -8,7 +8,7 @@ type PaginationProps = {
   setActivePage: (page: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = React.memo(
+export const Pagination: React.FC<PaginationProps> = React.memo(
   ({ currentPage, setActivePage }) => {
     return (
       <ReactPaginate
@@ -25,5 +25,3 @@ const Pagination: React.FC<PaginationProps> = React.memo(
     );
   }
 );
-
-export default Pagination;

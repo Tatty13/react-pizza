@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Search from './Search';
+import { Search } from './';
 import logo from '../assets/img/pizza-logo.svg';
 import { selectCart } from '../redux/cart/selectors';
 
-function Header() {
+export function Header() {
   const { totalCount, totalPrice, items } = useSelector(selectCart);
   const { pathname } = useLocation();
   const isMounted = useRef(false);
@@ -81,5 +81,3 @@ function Header() {
     </div>
   );
 }
-
-export default Header;

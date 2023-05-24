@@ -7,7 +7,7 @@ import { selectItemsById } from '../../redux/cart/selectors';
 
 import type { CartItemProps, PizzaBlockProps } from '../../@types/types';
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({
   id,
   title,
   price,
@@ -96,5 +96,3 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
     </div>
   );
 };
-
-export default PizzaBlock;
