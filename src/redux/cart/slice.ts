@@ -94,12 +94,6 @@ const cartSlice = createSlice({
 
     setCart(state, action: PayloadAction<ICartSliceState>) {
       const { items, totalCount, totalPrice } = action.payload;
-      console.log(
-        ' items, totalCount, totalPrice',
-        items,
-        totalCount,
-        totalPrice
-      );
 
       state.items = items;
       state.totalCount = totalCount;
